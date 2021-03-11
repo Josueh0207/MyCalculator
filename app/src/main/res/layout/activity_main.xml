@@ -13,6 +13,7 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="6dp"
+        android:background="#A1BBD1C8"
         android:text=""
         android:textAlignment="textEnd"
         android:textSize="64sp"
@@ -41,6 +42,9 @@
             android:layout_column="0"
             android:layout_gravity="fill"
             android:layout_margin="4dip"
+            android:shadowColor="#6C6969"
+            android:shadowDy="4"
+            android:shadowRadius="12"
             android:text="@string/ac"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="56sp" />
@@ -206,8 +210,13 @@
             android:layout_column="3"
             android:layout_gravity="fill"
             android:layout_margin="4dip"
+            android:shadowColor="#757171"
+            android:shadowDx="6"
+            android:shadowDy="10"
+            android:shadowRadius="2"
             android:text="@string/_equals"
-            android:textSize="60sp" />
+            android:textSize="60sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button_0"
@@ -232,7 +241,8 @@
             android:layout_margin="4dip"
             android:gravity="center"
             android:text="@string/_decimal"
-            android:textSize="42sp" />
+            android:textSize="42sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button_multiply"
