@@ -108,65 +108,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText(numberText);
                 break;
             case R.id.button_add:
-                i = Integer.parseInt(numberText);
-
-                if(myStack.isEmpty())
-                {
-                    myStack.push(i);
-                    numberText = "";
-                    textView.setText("");
-                }
-                else
-                {
-                    int result = 0;
-                    if(myOperator == '+')
-                       result = myStack.pop() + i;
-                    else if(myOperator == '-')
-                        result = myStack.pop() - i;
-                    else if(myOperator == '*')
-                        result = myStack.pop() * i;
-                    else if(myOperator == '/')
-                        result = myStack.pop() / i;
-
-                    result = myStack.pop() + i;
-                    myStack.push(result);
-                    textView.setText("");
-                    numberText = result + "";
-                    textView.setText(numberText);
-                    numberText = "";
-                    myOperator = '+';
-                }
+                doOperation('+');
                 break;
             case R.id.button_subtract:
-                i = Integer.parseInt(numberText);
-
-                if(myStack.isEmpty())
-                {
-                    myStack.push(i);
-                    numberText = "";
-                    textView.setText("");
-                }
-                else
-                {
-                    int result = 0;
-                    if(myOperator == '+')
-                        result = myStack.pop() + i;
-                    else if(myOperator == '-')
-                        result = myStack.pop() - i;
-                    else if(myOperator == '*')
-                        result = myStack.pop() * i;
-                    else if(myOperator == '/')
-                        result = myStack.pop() / i;
-
-                    result = myStack.pop() - i;
-                    myStack.push(result);
-                    textView.setText("");
-
-                    numberText = result + "";
-                    textView.setText(numberText);
-                    numberText = "";
-                    myOperator = '-';
-                }
+                doOperation('-');
+                break;
+            case R.id.button_multiply:
+                doOperation('*');
+                break;
+            case R.id.button_divide:
+                doOperation('/');
                 break;
 
 
@@ -174,6 +125,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
+    }
+
+    private void doOperation(char operator)
+    {
+        int i = Integer.parseInt(numberText);
+        int result = 0;
+        if(myStack.isEmpty())
+        {
+            myStack.push(i);
+            numberText = "";
+            textView.setText("");
+        }
+        else {
+
+            if (myOperator == '+') {
+                result = myStack.pop() + i;
+            } else if (myOperator == '-')
+                result = myStack.pop() - i;
+            else if (myOperator == '*')
+                result = myStack.pop() * i;
+            else if (myOperator == '/')
+                result = myStack.pop() / i;
+
+            myStack.push(result);
+            textView.setText("");
+
+            numberText = result + "";
+            textView.setText(numberText);
+            numberText = "";
+        }
+
+        myOperator = operator;
 
     }
 }
