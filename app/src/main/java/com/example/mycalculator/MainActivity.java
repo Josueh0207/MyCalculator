@@ -23,36 +23,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         number0.setOnClickListener(this);
 
         number1 = findViewById(R.id.button_1);
-        number0.setOnClickListener(this);
+        number1.setOnClickListener(this);
 
         number2 = findViewById(R.id.button_2);
-        number0.setOnClickListener(this);
+        number2.setOnClickListener(this);
 
         number3 = findViewById(R.id.button_3);
-        number0.setOnClickListener(this);
+        number3.setOnClickListener(this);
 
         number4 = findViewById(R.id.button_4);
-        number0.setOnClickListener(this);
+        number4.setOnClickListener(this);
 
         number5 = findViewById(R.id.button_5);
-        number0.setOnClickListener(this);
+        number5.setOnClickListener(this);
 
         number6 = findViewById(R.id.button_6);
-        number0.setOnClickListener(this);
+        number6.setOnClickListener(this);
 
         number7 = findViewById(R.id.button_7);
-        number0.setOnClickListener(this);
+        number7.setOnClickListener(this);
 
         number8 = findViewById(R.id.button_8);
-        number0.setOnClickListener(this);
+        number8.setOnClickListener(this);
 
         number9 = findViewById(R.id.button_9);
-        number0.setOnClickListener(this);
+        number9.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
+
 
 
     }
