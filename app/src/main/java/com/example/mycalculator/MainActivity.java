@@ -118,13 +118,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
-                    int result = myStack.pop() + i;
+                    int result = 0;
+                    if(myOperator == '+')
+                       result = myStack.pop() + i;
+                    else if(myOperator == '-')
+                        result = myStack.pop() - i;
+                    else if(myOperator == '*')
+                        result = myStack.pop() * i;
+                    else if(myOperator == '/')
+                        result = myStack.pop() / i;
+
+                    result = myStack.pop() + i;
                     myStack.push(result);
                     textView.setText("");
-
                     numberText = result + "";
                     textView.setText(numberText);
                     numberText = "";
+                    myOperator = '+';
                 }
                 break;
             case R.id.button_subtract:
@@ -138,13 +148,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
-                    int result = myStack.pop() - i;
+                    int result = 0;
+                    if(myOperator == '+')
+                        result = myStack.pop() + i;
+                    else if(myOperator == '-')
+                        result = myStack.pop() - i;
+                    else if(myOperator == '*')
+                        result = myStack.pop() * i;
+                    else if(myOperator == '/')
+                        result = myStack.pop() / i;
+
+                    result = myStack.pop() - i;
                     myStack.push(result);
                     textView.setText("");
 
                     numberText = result + "";
                     textView.setText(numberText);
                     numberText = "";
+                    myOperator = '-';
                 }
                 break;
 
