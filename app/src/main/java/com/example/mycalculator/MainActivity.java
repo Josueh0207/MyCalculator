@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             numberText = i +"";
 
         }
-        if(operator != '=' && result == 0) {
+        if(operator != '=') {
             myOperator = operator;
             numberText = "";
         }
