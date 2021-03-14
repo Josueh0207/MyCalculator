@@ -12,11 +12,12 @@ import java.util.Stack;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Stack<Integer> myStack = new Stack<Integer>();
+    private Stack<Float> myStack2 = new Stack<Float>();
     private char myOperator;
     private String numberText = "";
     private TextView textView;
     private Button number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
-    private Button addButton, subtractButton, multiplyButton, divideButton, deleteButton;
+    private Button addButton, subtractButton, multiplyButton, divideButton, deleteButton, equalsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         divideButton.setOnClickListener(this);
         deleteButton = findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
+        equalsButton = findViewById(R.id.button_equals);
+        equalsButton.setOnClickListener(this);
     }
 
     @Override
@@ -124,6 +127,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 numberText = "";
                 textView.setText("0");
                 break;
+            case R.id.button_equals:
+                doOperation('=');
+                break;
 
 
 
@@ -154,6 +160,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result = myStack.pop() * i;
             else if (myOperator == '/')
                 result = myStack.pop() / i;
+            else if (operator == '='){
+                myStack.push(result);
+                numberText = result + "";
+                textView.setText(numberText);
+                numberText = "";
+                myOperator = ' ';
+                return;
+            }
 
             myStack.push(result);
             textView.setText("");
