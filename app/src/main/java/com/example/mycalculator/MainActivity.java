@@ -166,7 +166,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textView.setText("");
 
             numberText = result + "";
-            textView.setText(myStack.peek() + "");
+            textView.setText(numberText);
+            if(operator == '=')
             numberText = i +"";
 
         }
