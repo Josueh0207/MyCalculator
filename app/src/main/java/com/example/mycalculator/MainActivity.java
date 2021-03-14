@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 doOperation('+');
                 break;
             case R.id.button_subtract:
+
                 doOperation('-');
                 break;
             case R.id.button_multiply:
@@ -128,7 +129,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText("0");
                 break;
             case R.id.button_equals:
-                doOperation('=');
+                if(!myStack.isEmpty())
+                    doOperation('=');
+
                 break;
 
 
@@ -144,13 +147,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         int i = Integer.parseInt(numberText);
         int result = 0;
-        if(myStack.isEmpty())
-        {
+        if(myStack.isEmpty()) {
+
             myStack.push(i);
-            numberText = "";
-            textView.setText("");
         }
-        else {
+        else{
 
             if (myOperator == '+') {
                 result = myStack.pop() + i;
@@ -160,24 +161,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result = myStack.pop() * i;
             else if (myOperator == '/')
                 result = myStack.pop() / i;
-            else if (operator == '='){
-                myStack.push(result);
-                numberText = result + "";
-                textView.setText(numberText);
-                numberText = "";
-                myOperator = ' ';
-                return;
-            }
 
             myStack.push(result);
             textView.setText("");
 
             numberText = result + "";
-            textView.setText(numberText);
+            textView.setText(myStack.peek() + "");
+            numberText = i +"";
+
+        }
+        if(operator != '=' && result == 0) {
+            myOperator = operator;
             numberText = "";
         }
-
-        myOperator = operator;
 
     }
 }
