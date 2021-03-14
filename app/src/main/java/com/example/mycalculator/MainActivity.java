@@ -119,6 +119,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_divide:
                 doOperation('/');
                 break;
+            case R.id.button_delete:
+                myStack.removeAllElements();
+                numberText = "";
+                textView.setText("0");
+                break;
+
 
 
         }
