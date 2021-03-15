@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         decimalButton.setOnClickListener(this);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
 
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 createText(number9.getText().toString());
                 break;
             case R.id.button_add:
-                if (numberText != "" && !checkOperator)
+                if (!numberText.equals("") && !checkOperator)
                     doOperation('+');
                 else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '+';
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button_subtract:
-                if (numberText != "" && !checkOperator)
+                if (!numberText.equals("") && !checkOperator)
                     doOperation('-');
                 else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '-';
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button_multiply:
-                if (numberText != "" && !checkOperator)
+                if (!numberText.equals("") && !checkOperator)
                     doOperation('*');
                 else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '*';
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button_divide:
-                if (numberText != "" && !checkOperator)
+                if (!numberText.equals("") && !checkOperator)
                     doOperation('/');
                 else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '/';
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 break;
             case R.id.button__:
-                if(numberText == "")
+                if(numberText.equals(""))
                     numberText = "0";
                 if(!numberText.contains("."))
                     createText(decimalButton.getText().toString());
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 numberText = "";
             }
         }
-        else if (!checkType)
+        else
         {
             i = Integer.parseInt(numberText);
             int result = 0;
@@ -251,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         myStack2.push((float)r / i);
                         checkType = true;
                         myOperator = '/';
-                        numberText = myStack2.peek() + "";
+                        numberText = fmt.format(myStack2.peek()) + "";
                         textView.setText(numberText);
                         if (operator == '=') {
                             numberText = i + "";
@@ -304,6 +305,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             numberText = string;
             textView.setText(numberText);
             checkOperator = false;
+            checkType = false;
         }
     }
 }
