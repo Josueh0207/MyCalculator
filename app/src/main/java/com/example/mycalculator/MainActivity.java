@@ -185,8 +185,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result = myStack.pop() - i;
                 else if (myOperator == '*')
                     result = myStack.pop() * i;
-                else if (myOperator == '/')
+                else if (myOperator == '/' && !textView.getText().toString().equals("0"))
                     result = myStack.pop() / i;
+                else if (textView.getText().toString().equals("0"))
+                {
+                    myStack.removeAllElements();
+                    numberText = "";
+                    textView.setText("Error");
+                    return;
+                }
 
                 myStack.push(result);
 
