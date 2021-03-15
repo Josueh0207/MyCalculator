@@ -2,6 +2,7 @@ package com.example.mycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -65,15 +66,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        switch(v.getId())
-        {
+        switch(v.getId()) {
             case R.id.button_0:
-                if(numberText.length() != 0){
+                if (!textView.getText().toString().equals("0") ) {
                     createText(number0.getText().toString());
                 }
                 break;
             case R.id.button_1:
-                    createText(number1.getText().toString());
+                createText(number1.getText().toString());
                 break;
             case R.id.button_2:
                 createText(number2.getText().toString());
@@ -100,44 +100,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 createText(number9.getText().toString());
                 break;
             case R.id.button_add:
-                if(numberText != "" && !check)
+                if (numberText != "" && !check)
                     doOperation('+');
-                else if(myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
+                else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '+';
-                if(check) {
+                if (check) {
                     numberText = "";
                     check = false;
                     myOperator = '+';
                 }
                 break;
             case R.id.button_subtract:
-                if(numberText != "" && !check)
+                if (numberText != "" && !check)
                     doOperation('-');
-                else if(myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
+                else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '-';
-                if(check) {
+                if (check) {
                     numberText = "";
                     check = false;
                     myOperator = '-';
                 }
                 break;
             case R.id.button_multiply:
-                if(numberText != "" && !check)
+                if (numberText != "" && !check)
                     doOperation('*');
-                else if(myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
+                else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '*';
-                if(check) {
+                if (check) {
                     numberText = "";
                     check = false;
                     myOperator = '*';
                 }
                 break;
             case R.id.button_divide:
-                if(numberText != "" && !check)
+                if (numberText != "" && !check)
                     doOperation('/');
-                else if(myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
+                else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '/';
-                if(check) {
+                if (check) {
                     numberText = "";
                     check = false;
                     myOperator = '/';
@@ -150,10 +150,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 check = false;
                 break;
             case R.id.button_equals:
-                if(!myStack.isEmpty()) {
-                    doOperation('=');
-                    check = true;
-                }
+                if (!myStack.isEmpty()) {
+                        doOperation('=');
+                        check = true;
+                    }
+
                 break;
 
 
@@ -165,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void doOperation(char operator)
     {
 
@@ -176,19 +178,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else{
 
-            if (myOperator == '+') {
-                result = myStack.pop() + i;
-            } else if (myOperator == '-')
-                result = myStack.pop() - i;
-            else if (myOperator == '*')
-                result = myStack.pop() * i;
-            else if (myOperator == '/')
-                result = myStack.pop() / i;
 
-            myStack.push(result);
+                if (myOperator == '+') {
+                    result = myStack.pop() + i;
+                } else if (myOperator == '-')
+                    result = myStack.pop() - i;
+                else if (myOperator == '*')
+                    result = myStack.pop() * i;
+                else if (myOperator == '/')
+                    result = myStack.pop() / i;
 
-            numberText = result + "";
-            textView.setText(numberText);
+                myStack.push(result);
+
+                numberText = result + "";
+                textView.setText(numberText);
 
             if(operator == '=') {
                 numberText = i + "";
@@ -205,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void createText(String string)
     {
+
         if(!check) {
             numberText += string + "";
             textView.setText(numberText);
