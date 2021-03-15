@@ -111,16 +111,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText(numberText);
                 break;
             case R.id.button_add:
-                doOperation('+');
+                if(numberText != "")
+                    doOperation('+');
                 break;
             case R.id.button_subtract:
-
-                doOperation('-');
+                if(numberText != "")
+                    doOperation('-');
                 break;
             case R.id.button_multiply:
-                doOperation('*');
+                if(numberText != "")
+                     doOperation('*');
                 break;
             case R.id.button_divide:
+                if(numberText != "")
                 doOperation('/');
                 break;
             case R.id.button_delete:
@@ -145,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void doOperation(char operator)
     {
+
         int i = Integer.parseInt(numberText);
         int result = 0;
         if(myStack.isEmpty()) {
@@ -163,18 +167,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result = myStack.pop() / i;
 
             myStack.push(result);
-            textView.setText("");
+            //textView.setText("");
 
             numberText = result + "";
             textView.setText(numberText);
-            if(operator == '=')
-            numberText = i +"";
+
+            if(operator == '=') {
+                numberText = i + "";
+            }
 
         }
         if(operator != '=') {
             myOperator = operator;
             numberText = "";
         }
+
 
     }
 }
