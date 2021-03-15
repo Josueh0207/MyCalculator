@@ -13,16 +13,15 @@ import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private DecimalFormat fmt = new DecimalFormat(".####");
-    private Stack<Integer> myStack = new Stack<Integer>();
-    private Stack<Float> myStack2 = new Stack<Float>();
+    private final DecimalFormat fmt = new DecimalFormat(".####");
+    private final Stack<Integer> myStack = new Stack<>();
+    private final Stack<Float> myStack2 = new Stack<>();
     private char myOperator;
     private boolean checkOperator = false;
     private boolean checkType = false;
     private String numberText = "";
     private TextView textView;
     private Button number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
-    private Button addButton, subtractButton, multiplyButton, divideButton, deleteButton, equalsButton;
     private Button decimalButton;
 
     @Override
@@ -53,17 +52,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         number9 = findViewById(R.id.button_9);
         number9.setOnClickListener(this);
 
-        addButton = findViewById(R.id.button_add);
+        Button addButton = findViewById(R.id.button_add);
         addButton.setOnClickListener(this);
-        subtractButton = findViewById(R.id.button_subtract);
+        Button subtractButton = findViewById(R.id.button_subtract);
         subtractButton.setOnClickListener(this);
-        multiplyButton = findViewById(R.id.button_multiply);
+        Button multiplyButton = findViewById(R.id.button_multiply);
         multiplyButton.setOnClickListener(this);
-        divideButton = findViewById(R.id.button_divide);
+        Button divideButton = findViewById(R.id.button_divide);
         divideButton.setOnClickListener(this);
-        deleteButton = findViewById(R.id.button_delete);
+        Button deleteButton = findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
-        equalsButton = findViewById(R.id.button_equals);
+        Button equalsButton = findViewById(R.id.button_equals);
         equalsButton.setOnClickListener(this);
         decimalButton = findViewById(R.id.button__);
         decimalButton.setOnClickListener(this);
