@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Stack<Integer> myStack = new Stack<Integer>();
     private Stack<Float> myStack2 = new Stack<Float>();
     private char myOperator;
+    private boolean check = false;
     private String numberText = "";
     private TextView textView;
     private Button number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
@@ -70,71 +71,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.button_0:
                 if(numberText.length() != 0){
-                    numberText += number0.getText().toString() + "";
-                    textView.setText(numberText);
+                    createText(number0.getText().toString());
                 }
                 break;
             case R.id.button_1:
-                    numberText += number1.getText().toString() + "";
-                    textView.setText(numberText);
+                    createText(number1.getText().toString());
                 break;
             case R.id.button_2:
-                numberText += number2.getText().toString() + "";
-                textView.setText(numberText);
+                createText(number2.getText().toString());
                 break;
             case R.id.button_3:
-                numberText += number3.getText().toString() + "";
-                textView.setText(numberText);
+                createText(number3.getText().toString());
                 break;
             case R.id.button_4:
-                numberText += number4.getText().toString() + "";
-                textView.setText(numberText);
+                createText(number4.getText().toString());
                 break;
             case R.id.button_5:
-                numberText += number5.getText().toString() + "";
-                textView.setText(numberText);
+                createText(number5.getText().toString());
                 break;
             case R.id.button_6:
-                numberText += number6.getText().toString() + "";
-                textView.setText(numberText);
+                createText(number6.getText().toString());
                 break;
             case R.id.button_7:
-                numberText += number7.getText().toString() + "";
-                textView.setText(numberText);
+                createText(number7.getText().toString());
                 break;
             case R.id.button_8:
-                numberText += number8.getText().toString() + "";
-                textView.setText(numberText);
+                createText(number8.getText().toString());
                 break;
             case R.id.button_9:
-                numberText += number9.getText().toString() + "";
-                textView.setText(numberText);
+                createText(number9.getText().toString());
                 break;
             case R.id.button_add:
-                if(numberText != "")
+                if(numberText != "" && !check)
                     doOperation('+');
+                if(check) {
+                    numberText = "";
+                    check = false;
+                    myOperator = '+';
+                }
                 break;
             case R.id.button_subtract:
-                if(numberText != "")
+                if(numberText != "" && !check)
                     doOperation('-');
+                if(check) {
+                    numberText = "";
+                    check = false;
+                    myOperator = '-';
+                }
                 break;
             case R.id.button_multiply:
-                if(numberText != "")
-                     doOperation('*');
+                if(numberText != "" && !check)
+                    doOperation('*');
+                if(check) {
+                    numberText = "";
+                    check = false;
+                    myOperator = '*';
+                }
                 break;
             case R.id.button_divide:
-                if(numberText != "")
-                doOperation('/');
+                if(numberText != "" && !check)
+                    doOperation('/');
+                if(check) {
+                    numberText = "";
+                    check = false;
+                    myOperator = '/';
+                }
                 break;
             case R.id.button_delete:
                 myStack.removeAllElements();
                 numberText = "";
                 textView.setText("0");
+                check = false;
                 break;
             case R.id.button_equals:
-                if(!myStack.isEmpty())
+                if(!myStack.isEmpty()) {
                     doOperation('=');
-
+                    check = true;
+                }
                 break;
 
 
@@ -167,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result = myStack.pop() / i;
 
             myStack.push(result);
-            //textView.setText("");
 
             numberText = result + "";
             textView.setText(numberText);
@@ -175,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(operator == '=') {
                 numberText = i + "";
             }
-
         }
         if(operator != '=') {
             myOperator = operator;
@@ -183,6 +194,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+    }
+
+    private void createText(String string)
+    {
+        if(!check) {
+            numberText += string + "";
+            textView.setText(numberText);
+        }
+        else
+        {
+            myStack.removeAllElements();
+            numberText = string;
+            textView.setText(numberText);
+            check= false;
+        }
     }
 }
 
