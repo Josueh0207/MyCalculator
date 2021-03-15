@@ -8,18 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private DecimalFormat fmt = new DecimalFormat(".###");
     private Stack<Integer> myStack = new Stack<Integer>();
     private Stack<Float> myStack2 = new Stack<Float>();
     private char myOperator;
-    private boolean check = false;
+    private boolean checkOperator = false;
+    private boolean checkType = false;
     private String numberText = "";
     private TextView textView;
     private Button number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
     private Button addButton, subtractButton, multiplyButton, divideButton, deleteButton, equalsButton;
+    private Button decimalButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         deleteButton.setOnClickListener(this);
         equalsButton = findViewById(R.id.button_equals);
         equalsButton.setOnClickListener(this);
+        decimalButton = findViewById(R.id.button__);
+        decimalButton.setOnClickListener(this);
     }
 
     @Override
@@ -100,64 +106,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 createText(number9.getText().toString());
                 break;
             case R.id.button_add:
-                if (numberText != "" && !check)
+                if (numberText != "" && !checkOperator)
                     doOperation('+');
                 else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '+';
-                if (check) {
+                if (checkOperator) {
                     numberText = "";
-                    check = false;
+                    checkOperator = false;
                     myOperator = '+';
                 }
                 break;
             case R.id.button_subtract:
-                if (numberText != "" && !check)
+                if (numberText != "" && !checkOperator)
                     doOperation('-');
                 else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '-';
-                if (check) {
+                if (checkOperator) {
                     numberText = "";
-                    check = false;
+                    checkOperator = false;
                     myOperator = '-';
                 }
                 break;
             case R.id.button_multiply:
-                if (numberText != "" && !check)
+                if (numberText != "" && !checkOperator)
                     doOperation('*');
                 else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '*';
-                if (check) {
+                if (checkOperator) {
                     numberText = "";
-                    check = false;
+                    checkOperator = false;
                     myOperator = '*';
                 }
                 break;
             case R.id.button_divide:
-                if (numberText != "" && !check)
+                if (numberText != "" && !checkOperator)
                     doOperation('/');
                 else if (myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
                     myOperator = '/';
-                if (check) {
+                if (checkOperator) {
                     numberText = "";
-                    check = false;
+                    checkOperator = false;
                     myOperator = '/';
                 }
                 break;
             case R.id.button_delete:
                 myStack.removeAllElements();
+                myStack2.removeAllElements();
                 numberText = "";
                 textView.setText("0");
-                check = false;
+                checkOperator = false;
+                checkType = false;
                 break;
             case R.id.button_equals:
-                if (!myStack.isEmpty()) {
+                if (!myStack.isEmpty() || !myStack2.isEmpty()) {
                         doOperation('=');
-                        check = true;
+                        checkOperator = true;
                     }
-
                 break;
-
-
+            case R.id.button__:
+                createText(decimalButton.getText().toString());
+                checkType = true;
+                break;
 
         }
 
@@ -169,14 +178,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     private void doOperation(char operator)
     {
+        int i;
+        float s;
 
-        int i = Integer.parseInt(numberText);
-        int result = 0;
-        if(myStack.isEmpty()) {
+        if(checkType) {
+            s = Float.parseFloat(numberText);
+            float result = 0;
+            if (!myStack.isEmpty())
+            {
+                float y  = (float) myStack.pop();
+                myStack2.push(y);
+            }
 
-            myStack.push(i);
+            if (myStack2.isEmpty()) {
+                myStack2.push(s);
+            }
+            else {
+
+
+                if (myOperator == '+') {
+                    result = myStack2.pop() + s;
+                } else if (myOperator == '-')
+                    result = myStack2.pop() - s;
+                else if (myOperator == '*')
+                    result = myStack2.pop() * s;
+                else if (myOperator == '/' && !textView.getText().toString().equals("0"))
+                    result = myStack2.pop() / s;
+                else if (textView.getText().toString().equals("0")) {
+                    myStack2.removeAllElements();
+                    numberText = "";
+                    textView.setText("Error");
+                    return;
+                }
+
+                myStack2.push(result);
+
+                numberText = result + "";
+                textView.setText(numberText);
+
+                if (operator == '=') {
+                    numberText = s + "";
+                }
+            }
+
+            if (operator != '=') {
+                myOperator = operator;
+                numberText = "";
+            }
         }
-        else{
+        else if (!checkType)
+        {
+            i = Integer.parseInt(numberText);
+            int result = 0;
+            if (myStack.isEmpty()) {
+
+                myStack.push(i);
+            } else {
 
 
                 if (myOperator == '+') {
@@ -187,8 +244,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result = myStack.pop() * i;
                 else if (myOperator == '/' && !textView.getText().toString().equals("0"))
                     result = myStack.pop() / i;
-                else if (textView.getText().toString().equals("0"))
-                {
+                else if (textView.getText().toString().equals("0")) {
                     myStack.removeAllElements();
                     numberText = "";
                     textView.setText("Error");
@@ -200,32 +256,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 numberText = result + "";
                 textView.setText(numberText);
 
-            if(operator == '=') {
-                numberText = i + "";
+                if (operator == '=') {
+                    numberText = i + "";
+                }
+            }
+
+            if (operator != '=') {
+                myOperator = operator;
+                numberText = "";
             }
         }
-
-        if(operator != '=') {
-            myOperator = operator;
-            numberText = "";
-        }
-
 
     }
 
     private void createText(String string)
     {
 
-        if(!check) {
+        if(!checkOperator) {
             numberText += string + "";
             textView.setText(numberText);
         }
         else
         {
             myStack.removeAllElements();
+            myStack2.removeAllElements();
             numberText = string;
             textView.setText(numberText);
-            check= false;
+            checkOperator = false;
         }
     }
 }
