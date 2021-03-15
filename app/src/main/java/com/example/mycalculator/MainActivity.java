@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        int i;
-
         switch(v.getId())
         {
             case R.id.button_0:
@@ -104,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_add:
                 if(numberText != "" && !check)
                     doOperation('+');
+                else if(myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
+                    myOperator = '+';
                 if(check) {
                     numberText = "";
                     check = false;
@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_subtract:
                 if(numberText != "" && !check)
                     doOperation('-');
+                else if(myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
+                    myOperator = '-';
                 if(check) {
                     numberText = "";
                     check = false;
@@ -122,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_multiply:
                 if(numberText != "" && !check)
                     doOperation('*');
+                else if(myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
+                    myOperator = '*';
                 if(check) {
                     numberText = "";
                     check = false;
@@ -131,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_divide:
                 if(numberText != "" && !check)
                     doOperation('/');
+                else if(myOperator == '+' || myOperator == '-' || myOperator == '*' || myOperator == '/')
+                    myOperator = '/';
                 if(check) {
                     numberText = "";
                     check = false;
