@@ -160,9 +160,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button_equals:
                 if (!myStack.isEmpty() || !myStack2.isEmpty()) {
-                        doOperation('=');
-                        checkOperator = true;
-                    }
+                    doOperation('=');
+                    checkOperator = true;
+                }
                 break;
             case R.id.button__:
                 if(numberText.equals(""))
@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         int i;
         float s;
+
 
         if(checkType) {
             s = Float.parseFloat(numberText);
@@ -218,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 myStack2.push(result);
 
                 numberText = fmt.format(result) + "";
+                shrinkText();
                 textView.setText(numberText);
 
                 if (operator == '=') {
@@ -253,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         checkType = true;
                         myOperator = '/';
                         numberText = fmt.format(myStack2.peek()) + "";
+                        shrinkText();
                         textView.setText(numberText);
                         if (operator == '=') {
                             numberText = i + "";
@@ -276,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 myStack.push(result);
 
                 numberText = result + "";
+                shrinkText();
                 textView.setText(numberText);
 
                 if (operator == '=') {

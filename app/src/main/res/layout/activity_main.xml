@@ -15,11 +15,13 @@
         android:background="#A1BBD1C8"
         android:text="0"
         android:textAlignment="textEnd"
-        android:textSize="108dp"
+        android:textAllCaps="false"
+        android:textSize="108sp"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <GridLayout
         android:id="@+id/gridLayout"
