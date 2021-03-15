@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText("0");
                 checkOperator = false;
                 checkType = false;
+                textView.setTextSize(108);
                 break;
             case R.id.button_equals:
                 if (!myStack.isEmpty() || !myStack2.isEmpty()) {
@@ -293,6 +294,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void createText(String string)
     {
 
+        if(numberText.length() > 8)
+            return;
+
+        shrinkText();
+
         if(!checkOperator) {
             numberText += string + "";
             textView.setText(numberText);
@@ -306,6 +312,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             checkOperator = false;
             checkType = false;
         }
+    }
+
+    private void shrinkText()
+    {
+        if(numberText.length() < 6)
+            textView.setTextSize(108);
+        else if(numberText.length() == 6){
+            textView.setTextSize(98);
+        }
+        else if(numberText.length() == 7){
+            textView.setTextSize(88);
+        }
+        else if(numberText.length() == 8){
+            textView.setTextSize(78);
+        }
+
     }
 }
 
