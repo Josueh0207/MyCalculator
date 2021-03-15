@@ -164,7 +164,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 break;
             case R.id.button__:
-                createText(decimalButton.getText().toString());
+                if(numberText == "")
+                    numberText = "0";
+                if(!numberText.contains("."))
+                    createText(decimalButton.getText().toString());
                 checkType = true;
                 break;
 
@@ -202,9 +205,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result = myStack2.pop() - s;
                 else if (myOperator == '*')
                     result = myStack2.pop() * s;
-                else if (myOperator == '/' && !textView.getText().toString().equals("0"))
+                else if (myOperator == '/' && !textView.getText().toString().equals("0") && s!= 0.0)
                     result = myStack2.pop() / s;
-                else if (textView.getText().toString().equals("0")) {
+                else if (textView.getText().toString().equals("0") || s == 0.0) {
                     myStack2.removeAllElements();
                     numberText = "";
                     textView.setText("Error");
@@ -242,8 +245,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result = myStack.pop() - i;
                 else if (myOperator == '*')
                     result = myStack.pop() * i;
-                else if (myOperator == '/' && !textView.getText().toString().equals("0"))
-                    result = myStack.pop() / i;
+                else if (myOperator == '/' && !textView.getText().toString().equals("0")) {
+                    int r = myStack.pop();
+                    if(r % i != 0){
+                        myStack2.push((float)r / i);
+                        checkType = true;
+                        myOperator = '/';
+                        numberText = myStack2.peek() + "";
+                        textView.setText(numberText);
+                        if (operator == '=') {
+                            numberText = i + "";
+                        }
+                        if (operator != '=') {
+                            myOperator = operator;
+                            numberText = "";
+                        }
+                        return;}
+                    else
+                     result = r / i;
+
+                }
                 else if (textView.getText().toString().equals("0")) {
                     myStack.removeAllElements();
                     numberText = "";
