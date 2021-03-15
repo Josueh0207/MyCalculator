@@ -13,7 +13,7 @@ import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private DecimalFormat fmt = new DecimalFormat(".###");
+    private DecimalFormat fmt = new DecimalFormat(".####");
     private Stack<Integer> myStack = new Stack<Integer>();
     private Stack<Float> myStack2 = new Stack<Float>();
     private char myOperator;
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 myStack2.push(result);
 
-                numberText = result + "";
+                numberText = fmt.format(result) + "";
                 textView.setText(numberText);
 
                 if (operator == '=') {
