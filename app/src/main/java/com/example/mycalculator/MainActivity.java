@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 checkType = true;
                 break;
             case R.id.button_changeOp:
-                if(!myStack.isEmpty() || !numberText.equals(""))
+                if(!myStack.isEmpty() || !numberText.equals("") && !checkType)
                 {
                     if(!myStack.isEmpty()){
                         int x = myStack.pop() * (-1);
@@ -202,14 +202,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         float x = myStack2.pop() * (-1);
                         myStack2.push(x);
                         numberText = x + "";
-                        textView.setText(numberText);
                     }
-                    else{
+                    else if(!myStack.isEmpty())
+                    {
+                        int x = myStack.pop();
+                        float y = (-1) * x;
+                        numberText = y + "";
+                    }
+                    else {
                         float x = Float.parseFloat(numberText);
                         x *= -1;
-                        numberText = x +"";
-                        textView.setText(numberText);
+                        numberText = x + "";
                     }
+
+                    textView.setText(numberText);
+
                 }
 
                 break;
