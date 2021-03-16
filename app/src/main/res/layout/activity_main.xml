@@ -100,7 +100,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <Button
-        android:id="@+id/button_percent"
+        android:id="@+id/button_changeOp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
@@ -108,8 +108,8 @@
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
         android:gravity="center"
-        android:text="@string/_percent"
-        android:textSize="56sp"
+        android:text="@string/changeOp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
         app:layout_constraintStart_toStartOf="@+id/guideline7"

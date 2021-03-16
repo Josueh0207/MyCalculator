@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String numberText = "";
     private TextView textView;
     private Button number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
-    private Button decimalButton;
+    private Button decimalButton, changeOperator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         equalsButton.setOnClickListener(this);
         decimalButton = findViewById(R.id.button__);
         decimalButton.setOnClickListener(this);
+        changeOperator = findViewById(R.id.button_changeOp);
+        changeOperator.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(v.getId()) {
             case R.id.button_0:
-                if (!textView.getText().toString().equals("0") ) {
+                if (!textView.getText().toString().equals("0")) {
                     createText(number0.getText().toString());
                 }
                 break;
@@ -171,13 +173,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button__:
-                if(numberText.equals(""))
+                if (numberText.equals(""))
                     numberText = "0";
-                if(!numberText.contains("."))
+                if (!numberText.contains("."))
                     createText(decimalButton.getText().toString());
                 checkType = true;
                 break;
+            case R.id.button_changeOp:
+                if(!myStack.isEmpty() || !numberText.equals(""))
+                {
+                    if(!myStack.isEmpty()){
+                        int x = myStack.pop() * (-1);
+                        myStack.push(x);
+                        numberText = x + "";
+                        textView.setText(numberText);
+                    }
+                    else{
+                        int x = Integer.parseInt(numberText);
+                        x *= -1;
+                        numberText = x +"";
+                        textView.setText(numberText);
+                    }
+                }
+                else if (!myStack2.isEmpty() || !numberText.equals(""))
+                {
+                    if(!myStack2.isEmpty())
+                    {
+                        float x = myStack2.pop() * (-1);
+                        myStack2.push(x);
+                        numberText = x + "";
+                        textView.setText(numberText);
+                    }
+                    else{
+                        float x = Float.parseFloat(numberText);
+                        x *= -1;
+                        numberText = x +"";
+                        textView.setText(numberText);
+                    }
+                }
 
+                break;
         }
 
 
@@ -195,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(checkType) {
             s = Float.parseFloat(numberText);
             float result = 0;
+
             if (!myStack.isEmpty())
             {
                 float y  = (float) myStack.pop();
@@ -205,7 +241,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 myStack2.push(s);
             }
             else {
-
 
                 if (myOperator == '+') {
                     result = myStack2.pop() + s;
@@ -243,14 +278,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             i = Integer.parseInt(numberText);
             int result = 0;
             if (myStack.isEmpty()) {
-
                 myStack.push(i);
             } else {
 
 
-                if (myOperator == '+') {
+                if (myOperator == '+')
                     result = myStack.pop() + i;
-                } else if (myOperator == '-')
+                else if (myOperator == '-')
                     result = myStack.pop() - i;
                 else if (myOperator == '*')
                     result = myStack.pop() * i;
@@ -270,12 +304,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             myOperator = operator;
                             numberText = "";
                         }
-                        return;}
+                        return;
+                    }
                     else
                      result = r / i;
 
                 }
-                else if (textView.getText().toString().equals("0")) {
+                else if (textView.getText().toString().equals("0") ||textView.getText().toString().equals("-0")) {
                     myStack.removeAllElements();
                     numberText = "";
                     textView.setText("Error");

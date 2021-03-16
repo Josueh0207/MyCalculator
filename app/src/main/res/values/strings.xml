@@ -18,4 +18,5 @@
     <string name="_divide">/</string>
     <string name="_percent">%</string>
     <string name="_multiply">*</string>
+    <string name="changeOp">+/-</string>
 </resources>

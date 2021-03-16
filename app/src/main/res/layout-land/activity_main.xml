@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button_percent"
+        android:id="@+id/button_changeOp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/_percent"
@@ -247,7 +247,6 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
         android:background="#A1BBD1C8"
         android:text="0"
         android:textAlignment="textEnd"
