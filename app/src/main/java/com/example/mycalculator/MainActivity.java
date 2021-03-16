@@ -1,5 +1,10 @@
 package com.example.mycalculator;
 
+/*******************
+ * Student name: Josue Elias Hernandez Argenal
+ * Student id: T00642089
+*******************/
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
