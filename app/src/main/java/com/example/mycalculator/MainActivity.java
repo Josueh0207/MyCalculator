@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button_equals:
-                if (!myStack.isEmpty() || !myStack2.isEmpty()) {
+                if (!myStack.isEmpty()|| !myStack2.isEmpty() && !numberText.equals("0.")){
                     doOperation('=');
                     checkOperator = true;
                 }
