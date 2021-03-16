@@ -82,8 +82,8 @@
 
     <Button
         android:id="@+id/button_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="4dp"
@@ -93,7 +93,7 @@
         android:shadowRadius="12"
         android:text="@string/ac"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="56sp"
+        android:textSize="42sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"

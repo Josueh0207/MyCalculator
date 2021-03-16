@@ -3,6 +3,7 @@ package com.example.mycalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -156,7 +157,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText("0");
                 checkOperator = false;
                 checkType = false;
-                textView.setTextSize(108);
+                int orientation = getResources().getConfiguration().orientation;
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    textView.setTextSize(60);
+                } else {
+                    textView.setTextSize(108);
+                }
                 break;
             case R.id.button_equals:
                 if (!myStack.isEmpty() || !myStack2.isEmpty()) {
@@ -298,8 +304,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void createText(String string)
     {
 
-        if(numberText.length() > 8)
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if(numberText.length() > 15)
             return;
+        } else {
+            if(numberText.length() > 8)
+                return;
+        }
+
 
         shrinkText();
 
@@ -320,17 +333,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void shrinkText()
     {
-        if(numberText.length() < 6)
-            textView.setTextSize(108);
-        else if(numberText.length() == 6){
-            textView.setTextSize(98);
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            textView.setTextSize(60);
+        } else {
+            if(numberText.length() < 6)
+                textView.setTextSize(108);
+            else if(numberText.length() == 6){
+                textView.setTextSize(98);
+            }
+            else if(numberText.length() == 7){
+                textView.setTextSize(88);
+            }
+            else if(numberText.length() == 8){
+                textView.setTextSize(78);
+            }
         }
-        else if(numberText.length() == 7){
-            textView.setTextSize(88);
-        }
-        else if(numberText.length() == 8){
-            textView.setTextSize(78);
-        }
+
 
     }
 }
